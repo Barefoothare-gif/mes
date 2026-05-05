@@ -1,15 +1,16 @@
 [project]
-name = "multienginesearch"
-version = "0.1.0"
-description = "Multi-Engine Search - 多引擎搜索工具"
-authors = [{ name = "Maxiee", email = "maxieewong@gmail.com" }]
+name = "mes-search"
+version = "0.2.0"
+description = "Multi-Engine Search CLI with circuit breaker, parallel fallback, and Python 3.11+ support"
+authors = [{ name = "Maxiee" }, { name = "suisui (Hermes Agent)", email = "suisui@hermes.ai" }]
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = [
-    "typer[all] (>=0.16.0,<0.17.0)",
-    "duckduckgo-search>=6.0.0",
+    "typer[all]>=0.12.0",
+    "ddgs>=3.0.0",  # renamed from duckduckgo-search
     "requests>=2.31.0",
     "pytz>=2023.3",
+    "httpx>=0.25.0",  # for async support
 ]
 
 [project.scripts]
@@ -17,7 +18,6 @@ mes = "multienginesearch.cli:main"
 
 [tool.poetry]
 packages = [{ include = "multienginesearch", from = "src" }]
-
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.0"
