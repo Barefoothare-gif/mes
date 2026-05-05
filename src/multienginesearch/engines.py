@@ -176,7 +176,7 @@ class DuckDuckGoEngine(SearchEngine):
             with DDGS() as ddgs:
                 # Fixed: use ddgs.text() instead of ddgs.text()
                 results = list(ddgs.text(
-                    keywords=query,
+                    query=query,
                     region=self.region,
                     safesearch=self.safesearch,
                     timelimit=time_filter,
@@ -199,7 +199,12 @@ class DuckDuckGoEngine(SearchEngine):
             cb = SEARCH_CIRCUIT_BREAKERS.get("duckduckgo")
             if cb:
                 cb._on_failure()
-            print(f"DuckDuckGo 搜索出错: {e}")
+            # 网络错误可能是临时的，不一定触发熔断
+            error_str = str(e).lower()
+            if 'network' in error_str or 'timeout' in error_str or 'connection' in error_str:
+                print(f"DuckDuckGo 网络错误 (暂不熔断): {e}")
+            else:
+                print(f"DuckDuckGo 搜索出错: {e}")
             return SearchResponse([])
 
 

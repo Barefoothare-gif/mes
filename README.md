@@ -1,5 +1,9 @@
 # mes - Multi-Engine Search CLI
 
+> ⚠️ **网络要求**: mes 需要访问多个搜索源 (DuckDuckGo, Brave等)。在受限网络环境中可能需要 VPN。
+
+
+
 **饕餮进化 R15 版本** | Python 3.11+ | 熔断降级 | 并行搜索
 
 Forked and enhanced from [maxiee/MultiEngineSearch](https://github.com/maxiee/MultiEngineSearch)
